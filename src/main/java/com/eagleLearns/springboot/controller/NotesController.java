@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,11 @@ public class NotesController {
 	@GetMapping("notes/{id}")
 	public ResponseEntity<Notes> readNote(@PathVariable Long id){
 		return new  ResponseEntity<Notes>(nRepo.findById(id).get(),HttpStatus.CREATED);
+	}
+	@DeleteMapping("/notes/{id}")
+		public ResponseEntity<HttpStatus> deleteNote(@PathVariable Long id){
+		nRepo.deleteById(id);
+		return new  ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT); 
 	}
 		
 		
